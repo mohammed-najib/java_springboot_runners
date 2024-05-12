@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 @Repository
-public class JdbcClientRunRepository {
+public class JdbcRunRepository {
 
     // private static final Logger log =
     // LoggerFactory.getLogger(JdbcClientRunRepository.class);
     private final JdbcClient jdbcClient;
 
-    public JdbcClientRunRepository(JdbcClient jdbcClient) {
+    public JdbcRunRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 
@@ -28,7 +28,7 @@ public class JdbcClientRunRepository {
 
     public Optional<Run> findById(Integer id) {
         return jdbcClient
-                .sql("SELECT id, title, started_on, completed_on, miles, location FROM run WHERE id = :id")
+                .sql("SELECT id, title, started_on, completed_on, miles, location, version FROM run WHERE id = :id")
                 .param("id", id)
                 .query(Run.class)
                 .optional();
